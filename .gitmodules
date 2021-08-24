@@ -1,6 +1,12 @@
 [submodule "saleor-storefront"]
 	path = saleor-storefront
 	url = https://github.com/felipearmat/saleor-storefront
+	branch = 2.11-vue
 [submodule "saleor-dashboard"]
 	path = saleor-dashboard
 	url = https://github.com/felipearmat/saleor-dashboard
+	branch = 2.11-vue
+[submodule "saleor"]
+	path = saleor
+	url = https://github.com/felipearmat/saleor
+	branch = 2.11-vue
