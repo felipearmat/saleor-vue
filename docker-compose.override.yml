@@ -1,0 +1,39 @@
+version: "2"
+
+services:
+  api:
+    build:
+      context: ./saleor
+      dockerfile: ./Dockerfile
+      args:
+        STATIC_URL: "/static/"
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+      - STOREFRONT_URL=http://localhost:3000/
+      - DASHBOARD_URL=http://localhost:9000/
+
+  storefront:
+    build:
+      context: ./saleor-storefront
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - 3000:3000
+
+  dashboard:
+    build:
+      context: ./saleor-dashboard
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - 9000:9000
+
+  db:
+    environment:
+      - POSTGRES_USER=saleor
+      - POSTGRES_PASSWORD=saleor
+
+  worker:
+    build:
+      context: ./saleor
+      dockerfile: ./Dockerfile
+      args:
+        STATIC_URL: "/static/"
