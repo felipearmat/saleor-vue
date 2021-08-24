@@ -127,7 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# Arquivos especificos de producao
-common.prod.env
-docker-compose.prod.yml
