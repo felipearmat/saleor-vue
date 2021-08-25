@@ -2,27 +2,35 @@ version: "2"
 
 services:
   api:
-    image: felipearmat/saleor-vue
+    build:
+      context: ./saleor
+      dockerfile: ./Dockerfile
+      args:
+        STATIC_URL: "/static/"
     env_file: common.prod.env
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
-      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1,45.33.93.38
-      - ALLOWED_HOSTS=localhost,127.0.0.1,45.33.93.38
+      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1
+      - ALLOWED_HOSTS=localhost,127.0.0.1
       # don't generate thumbnails on demand
       - CREATE_IMAGES_ON_DEMAND=False
-      - MEDIA_URL=http://saleor-api.mbweb.com.br/media/
+      - MEDIA_URL=http://localhost:8000/media/
       # set debug to False for production mode
       - DEBUG=False
 
   storefront:
-    image: felipearmat/saleor-storefront-vue
+    build:
+      context: ./saleor-storefront
+      dockerfile: ./Dockerfile
     ports:
       - 3000:80
     env_file: common.prod.env
 
   dashboard:
-    image: felipearmat/saleor-dashboard-vue
+    build:
+      context: ./saleor-dashboard
+      dockerfile: ./Dockerfile
     ports:
       - 9000:80
     env_file: common.prod.env
@@ -33,15 +41,19 @@ services:
       - POSTGRES_PASSWORD=saleor
 
   worker:
-    image: felipearmat/saleor-vue
+    build:
+      context: ./saleor
+      dockerfile: ./Dockerfile
+      args:
+        STATIC_URL: "/static/"
     env_file: common.prod.env
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
-      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1,45.33.93.38
-      - ALLOWED_HOSTS=localhost,127.0.0.1,45.33.93.38
+      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1
+      - ALLOWED_HOSTS=localhost,127.0.0.1
       # don't generate thumbnails on demand
       - CREATE_IMAGES_ON_DEMAND=False
-      - MEDIA_URL=http://saleor-api.mbweb.com.br/media/
+      - MEDIA_URL=http://localhost:8000/media/
       # set debug to False for production mode
       - DEBUG=False
