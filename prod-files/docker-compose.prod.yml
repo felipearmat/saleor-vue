@@ -11,8 +11,8 @@ services:
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
-      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1
-      - ALLOWED_HOSTS=localhost,127.0.0.1
+      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1,0.0.0.0
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
       # don't generate thumbnails on demand
       - CREATE_IMAGES_ON_DEMAND=False
       - MEDIA_URL=http://localhost:8000/media/
@@ -50,8 +50,8 @@ services:
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
-      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1
-      - ALLOWED_HOSTS=localhost,127.0.0.1
+      - ALLOWED_CLIENT_HOSTS=localhost,127.0.0.1,0.0.0.0
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
       # don't generate thumbnails on demand
       - CREATE_IMAGES_ON_DEMAND=False
       - MEDIA_URL=http://localhost:8000/media/
