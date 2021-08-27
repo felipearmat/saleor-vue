@@ -8,9 +8,6 @@ services:
       args:
         STATIC_URL: "/static/"
     env_file: common.prod.env
-    volumes:
-      - ./saleor/nginx/ssl:/etc/nginx/sites-available/
-      - /etc/letsencrypt/live/saleor:/etc/cert/
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
@@ -26,9 +23,6 @@ services:
     build:
       context: ./saleor-storefront
       dockerfile: ./Dockerfile
-    volumes:
-      - ./saleor-storefront/nginx/ssl:/etc/nginx/sites-available/
-      - /etc/letsencrypt/live/saleor-storefront:/etc/cert/
     ports:
       - 3000:80
     env_file: common.prod.env
@@ -37,9 +31,6 @@ services:
     build:
       context: ./saleor-dashboard
       dockerfile: ./Dockerfile
-    volumes:
-      - ./saleor-dashboard/nginx/ssl:/etc/nginx/sites-available/
-      - /etc/letsencrypt/live/saleor-dashboard:/etc/cert/
     ports:
       - 9000:80
     env_file: common.prod.env
@@ -56,8 +47,6 @@ services:
       args:
         STATIC_URL: "/static/"
     env_file: common.prod.env
-    volumes:
-      - ./saleor/nginx/ssl:/etc/nginx/sites-available/
     environment:
       - JAEGER_AGENT_HOST=jaeger
       # add the server hosts - in this case production host is 45.33.93.38
